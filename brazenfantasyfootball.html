@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brazen Fantasy Football</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Orbitron', sans-serif;
+      margin: 0;
+      background-color: #f9f9f9;
+      display: flex;
+    }
+    .side-column {
+      background-color: #b3b3ff; /* Lighter indigo-like shade */
+      width: 18%;
+      min-height: 100vh;
+    }
+    .main-content {
+      flex: 1;
+      padding: 2rem;
+      color: white;
+    }
+    h1 {
+      text-align: center;
+      background-color: gold; /* Gold background for the title */
+      padding: 1rem;
+      margin: 0;
+      display: inline-block;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    }
+    form {
+      margin-bottom: 1rem;
+    }
+    input, select, button {
+      margin: 0.3rem;
+      padding: 0.5rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 0.5rem;
+      text-align: left;
+    }
+    th {
+      background-color: #eee;
+    }
+  </style>
+</head>
+<body>
+  <div class="side-column"></div>
+  <div class="main-content">
+    <h1>Brazen Fantasy Football</h1>
+    <p>Enter your player rankings below:</p>
+
+    <!-- Player Ranking Form -->
+    <form id="ranking-form">
+      <input type="text" id="player-name" placeholder="Player Name" required />
+      <input type="text" id="player-position" placeholder="Position" required />
+      <input type="number" id="player-rank" placeholder="Rank" required />
+      <button type="submit">Add Player</button>
+    </form>
+
+    <!-- Player Rankings Table -->
+    <table id="ranking-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Position</th>
+          <th>Rank</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <div class="side-column"></div>
+
+  <script>
+    const form = document.getElementById("ranking-form");
+    const tableBody = document.querySelector("#ranking-table tbody");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const name = document.getElementById("player-name").value;
+      const position = document.getElementById("player-position").value;
+      const rank = document.getElementById("player-rank").value;
+
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${name}</td>
+        <td>${position}</td>
+        <td>${rank}</td>
+        <td><button onclick="this.parentElement.parentElement.remove()">Delete</button></td>
+      `;
+      tableBody.appendChild(row);
+
+      form.reset();
+    });
+  </script>
+</body>
+</html>
